@@ -1,7 +1,7 @@
 import socket
 import sys
 import threading
-import hashlib
+import auth
 
 
 def server_program():
@@ -74,25 +74,65 @@ def threaded_client(connection):
         #     connection.send(str.encode(f'[SERVER] You entered: {user_input}'))
         # except IOError as e:
         #     print("[IOError]", str(e))
-        
-        # Getting Username and Password for Login
         if user_input == '1':
+            """
+            Login dialog
+            Getting Username and Password for Login
+            """
             connection.send(str.encode("1"))
             username = connection.recv(2048).decode()
             password = connection.recv(2048).decode()
             print(f'[SERVER LOGIN] Username: {username} | Password: {password}')
-        # Getting Username and Password for Register
+            # Check if username exists in users.json
+            if auth.check_user_exist(username) == False:
+                connection.send(str.encode("5"))
+                print("Username does not exist.")
+                return
+            else:
+                print("Username exists")
+            # If user exists, check if password is correct
+            if auth.check_user_password(username, password) == False:
+                connection.send(str.encode("6"))
+                print("Incorrect password.")
+                return
+            else:
+                print("Password is correct")
+            # If password is correct, send server menu code
         elif user_input == '2':
+            """ 
+            Registration dialog
+            Getting Username and Password for Register
+            """
             connection.send(str.encode("2"))
             username = connection.recv(2048).decode()
             password = connection.recv(2048).decode()
             print(f'[SERVER REGISTER] Username: {username} | Password: {password}')
+            # Check if username is valid, convert it to lowercase
+            if auth.check_username(username) == False:
+                # connection.send(str.encode("5"))
+                print("Username is invalid.")
+                return
+            else:
+                print("Username is valid")
+            
+            # Check if username exists in users.json
+            if auth.check_user_exist(username) == True:
+                connection.send(str.encode("4"))
+                print("Username already exists.")
+                return
+            # Password check is done at client side, we add the user to users.json
+            auth.add_user(username, password)
+            connection.send(str.encode("1"))
+
         # User is exiting, we close the connection
         else:
             connection.close()
 
     except ConnectionResetError as e:
-        print("[USER FORCED DISCONNECT]")
+        print("[USER FORCED DISCONNECT] Closing connection")
+        connection.close()
+    except BrokenPipeError as e:
+        print("[USER FORCED DISCONNECT] Closing connection")
         connection.close()
 
 

@@ -1,18 +1,1 @@
-[
-    {
-      "username": "jrobinson",
-      "password": "jrobinson"
-    },
-    {
-      "username": "nghosh",
-      "password": "nghosh"
-    },
-    {
-      "username": "yli6",
-      "password": "yli6"
-    },
-    {
-      "username": "ychien",
-      "password": "ychien"
-    }
-  ]
+[{"username": "jrobinson", "password": "jrobinson"}, {"username": "yli6", "password": "yli6"}, {"username": "ychien", "password": "ychien"}, {"username": "nghosh", "password": "a000787ab76ec0930a5c2cd2e692cc69869b1f8db763f6bbd10adaeba428027c:50a894587ff24a4dae42596bc65feb5c"}]
