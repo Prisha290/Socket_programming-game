@@ -11,7 +11,7 @@ def client_program():
     try: 
         # get host name
         HOST = socket.gethostbyname(socket.gethostname())
-        PORT = 5050
+        PORT = 5000
 
         # Socket instance
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -51,6 +51,9 @@ def menu_code(code, client_socket):
         print("Type exit to disconnect")
         user_input = input(' -> ')
         if user_input == "exit":
+            # Send exit code to server
+            client_socket.send(str.encode(user_input))
+            # Close client connection
             client_socket.close()
             return
         client_socket.send(str.encode(user_input))
@@ -71,7 +74,7 @@ def menu_code(code, client_socket):
             password = getpass.getpass()
         
         # Hash the password entered by the user
-        password = auth.hash_password(password)
+        # password = auth.hash_password(password)
         client_socket.send(str.encode(password))
 
     elif code == "2":
@@ -115,7 +118,7 @@ def menu_code(code, client_socket):
         # Show the welcome menu again
         menu_code("0", client_socket)
     else:
-        print("Server error. Please try again.\n")
+        print("Server closed connection. Please try again.\n")
         client_socket.close()
 
 
