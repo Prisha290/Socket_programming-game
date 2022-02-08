@@ -6,8 +6,6 @@ import uuid
 import hashlib
 import re
 import json
-# import bcrypt
-
 
 # [CLIENT] This function generates a hashed password
 def hash_password(password):
@@ -24,12 +22,6 @@ def check_hash_password(hashed_psd, user_input_psd):
     if hashlib.sha256(salt.encode() + user_input_psd.encode()).hexdigest() == password:
         flag = True
     return flag
-
-# def hash_password(password):
-#     return bcrypt.hashpw(password, bcrypt.gensalt())
-
-# def check_hash_password(hashed_psd, user_input_psd):
-#     return bcrypt.checkpw(user_input_psd, hashed_psd)
 
 
 # [CLIENT] Check if username is valid
