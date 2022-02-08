@@ -6,30 +6,30 @@ import uuid
 import hashlib
 import re
 import json
-import bcrypt
+# import bcrypt
 
 
 # [CLIENT] This function generates a hashed password
-# def hash_password(password):
-#     salt = uuid.uuid4().hex
-#     code = salt.encode() + password.encode()
-#     hashed_str = hashlib.sha256(code).hexdigest() + ':' + salt
-#     return hashed_str
-
-
-# # [SERVER] This password checker function checks if the password is correct
-# def check_hash_password(hashed_psd, user_input_psd):
-#     flag = False
-#     password, salt = hashed_psd.split(':')
-#     if hashlib.sha256(salt.encode() + user_input_psd.encode()).hexdigest() == password:
-#         flag = True
-#     return flag
-
 def hash_password(password):
-    return bcrypt.hashpw(password, bcrypt.gensalt())
+    salt = uuid.uuid4().hex
+    code = salt.encode() + password.encode()
+    hashed_str = hashlib.sha256(code).hexdigest() + ':' + salt
+    return hashed_str
 
+
+# [SERVER] This password checker function checks if the password is correct
 def check_hash_password(hashed_psd, user_input_psd):
-    return bcrypt.checkpw(user_input_psd, hashed_psd)
+    flag = False
+    password, salt = hashed_psd.split(':')
+    if hashlib.sha256(salt.encode() + user_input_psd.encode()).hexdigest() == password:
+        flag = True
+    return flag
+
+# def hash_password(password):
+#     return bcrypt.hashpw(password, bcrypt.gensalt())
+
+# def check_hash_password(hashed_psd, user_input_psd):
+#     return bcrypt.checkpw(user_input_psd, hashed_psd)
 
 
 # [CLIENT] Check if username is valid
