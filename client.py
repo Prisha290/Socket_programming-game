@@ -8,10 +8,10 @@ import auth
 # print(env_host, env_port)
 
 def client_program():
-    try: 
+    PORT = input("Enter a PORT number: ")
+    try:
         # get host name
         HOST = socket.gethostbyname(socket.gethostname())
-        PORT = 5000
 
         # Socket instance
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
