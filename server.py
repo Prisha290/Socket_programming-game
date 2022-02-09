@@ -1,6 +1,7 @@
 import socket
 import threading
 import auth
+import time
 
 class ThreadedServer(object):
   def __init__(self, host, port):
@@ -21,6 +22,7 @@ class ThreadedServer(object):
   
   def listen_to_client(self, client, address):
     client.send(str.encode("Welcome to the server!\n"))
+    time.sleep(0.1)
     client.send(str.encode("0"))
     SIZE = 2048
     while True:
@@ -72,7 +74,7 @@ class ThreadedServer(object):
           else:
             # Add user to users.json
             auth.add_user(username, password)
-            client.send(str.encode("1"))
+            # client.send(str.encode("1"))
             print("[REGISTER SUCCESS]", username)
 
           

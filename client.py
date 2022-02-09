@@ -13,6 +13,7 @@ def client_program():
     try:
         # get host name
         HOST = socket.gethostbyname(socket.gethostname())
+        SIZE = 2048
 
         # Socket instance
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -20,30 +21,20 @@ def client_program():
         client_socket.connect((HOST, PORT))
 
         # Receive Welcome message
-        response = client_socket.recv(2048).decode()
+        response = client_socket.recv(SIZE).decode()
         print(response)
         # Receive Welcome Menu code from server
-        response = client_socket.recv(2048).decode()
+        response = client_socket.recv(SIZE).decode()
         # Print Welcome Menu
         menu_code(response, client_socket)
         
         # Receive next menu code from server
         while response:
-            response = client_socket.recv(2048).decode()
+            response = client_socket.recv(SIZE).decode()
             print(response)
             menu_code(response, client_socket)
     except OSError as e:
         print('Goodbye!')
-
-
-    # while message.lower().strip() != 'exit':
-    #   client_socket.send(message.encode())
-    #   data = client_socket.recv(1024).decode()
-
-    #   print("Received from server: ", data)
-
-    #   message = input(' -> ')
-    # client_socket.close()
 
 def menu_code(code, client_socket):
     if code == "0":
@@ -73,7 +64,7 @@ def menu_code(code, client_socket):
         while auth.check_password(password) == False:
             print("Password must be at least 4 characters long.")
             password = getpass.getpass()
-        
+        print("Sending password to server...")
         # Hash the password entered by the user
         # password = auth.hash_password(password)
         client_socket.send(str.encode(password))
@@ -98,6 +89,7 @@ def menu_code(code, client_socket):
         password = auth.hash_password(password)
         # password = input("Password: ")
         client_socket.send(str.encode(password))
+        client_socket.send(str.encode("1"))
 
     elif code == "3":
         print("Welcome to Maze Runner")
