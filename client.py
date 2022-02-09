@@ -9,6 +9,7 @@ import auth
 
 def client_program():
     PORT = input("Enter a PORT number: ")
+    PORT = int(PORT)
     try:
         # get host name
         HOST = socket.gethostbyname(socket.gethostname())
