@@ -31,7 +31,7 @@ def client_program():
         # Receive next menu code from server
         while response:
             response = client_socket.recv(SIZE).decode()
-            print(response)
+            # print(response)
             menu_code(response, client_socket)
     except OSError as e:
         print('Goodbye!')
@@ -101,7 +101,10 @@ def menu_code(code, client_socket):
         if user_input == "exit":
             client_socket.close()
             return
-        client_socket.send(str.encode(user_input))
+        else:
+            user_input = int(user_input) + 5
+
+        client_socket.send(str.encode(str(user_input)))
     elif code == "4":
         print("Username already exists. Please try again.\n")
         # Show the welcome menu again
@@ -110,6 +113,18 @@ def menu_code(code, client_socket):
         print("Username does not exist.\n")
         # Show the welcome menu again
         menu_code("0", client_socket)
+    elif code == "6":
+        print("Highscores")
+        print("This feature is in development. Please check back later")
+        client_socket.send(str.encode("3"))
+    elif code == "7":
+        print("Game Rules")
+        print("This feature is in development. Please check back later")
+        client_socket.send(str.encode("3"))
+    elif code == "8":
+        print("Game")
+        print("This feature is in development. Please check back later")
+        client_socket.send(str.encode("3"))
     else:
         print("Server closed connection. Please try again.\n")
         client_socket.close()
