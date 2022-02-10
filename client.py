@@ -1,6 +1,7 @@
 import socket
 import getpass # for password input
 import auth
+import time
 # from dotenv import load_dotenv
 
 # env_host = config('HOST')
@@ -54,7 +55,7 @@ def menu_code(code, client_socket):
         
         username = input("Username: ")
         while auth.check_username(username) == False:
-            print("Username must be at least 3 characters long and all lowercase")
+            print("Username must be at least 3 characters long and only letters")
             username = input("Username: ")
             username = username.lower()
         client_socket.send(str.encode(username))
@@ -74,7 +75,7 @@ def menu_code(code, client_socket):
 
         username = input("Username: ")
         while auth.check_username(username) == False:
-            print("Username must be at least 3 characters long and all lowercase")
+            print("Username must be at least 3 characters long and only letters")
             username = input("Username: ")
             username = username.lower()
         client_socket.send(str.encode(username))
@@ -87,8 +88,8 @@ def menu_code(code, client_socket):
 
         # Hash the password entered by the user
         password = auth.hash_password(password)
-        # password = input("Password: ")
         client_socket.send(str.encode(password))
+        time.sleep(0.5)
         client_socket.send(str.encode("1"))
 
     elif code == "3":

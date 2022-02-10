@@ -46,7 +46,7 @@ class ThreadedServer(object):
           print(f"[LOGIN] {username} | {password}")
           # Check if username in users.json
           if auth.check_user_exist(username) == False:
-            client.send(str.encode("0"))
+            client.send(str.encode("5"))
             print("[LOGIN FAILED] Username does not exist")
           else:
             # Check if password is correct
@@ -69,7 +69,7 @@ class ThreadedServer(object):
           print(f"[REGISTER] {username} | {password}")
           # Check if username in users.json
           if auth.check_user_exist(username) == True:
-            client.send(str.encode("0"))
+            client.send(str.encode("4"))
             print("[REGISTER FAILED] Username already exists")
           else:
             # Add user to users.json
