@@ -76,7 +76,26 @@ class ThreadedServer(object):
             auth.add_user(username, password)
             # client.send(str.encode("1"))
             print("[REGISTER SUCCESS]", username)
-
+        elif data == "3":
+          client.send(str.encode("3"))
+        elif data == "6":
+          """
+          Highscores dialog
+          The client will see the top 5 highscores
+          """
+          client.send(str.encode("6"))
+        elif data == "7":
+          """
+          Game rules dialog
+          The client will see the game rules
+          """
+          client.send(str.encode("7"))
+        elif data == "8":
+          """
+          Game
+          The client will play/see a game
+          """
+          client.send(str.encode("8"))
           
       except:
         client.close()
