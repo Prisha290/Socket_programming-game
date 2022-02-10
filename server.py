@@ -50,11 +50,12 @@ class ThreadedServer(object):
             print("[LOGIN FAILED] Username does not exist")
           else:
             # Check if password is correct
+            print("Checking password...")
             if auth.check_user_password(username, password) == False:
               client.send(str.encode("6"))
               print("[LOGIN FAILED] Password is incorrect")
             else:
-              client.send(str.encode("7"))
+              client.send(str.encode("3"))
               print("[LOGIN SUCCESS]", username)
         elif data == "2":
           """
@@ -78,24 +79,24 @@ class ThreadedServer(object):
             print("[REGISTER SUCCESS]", username)
         elif data == "3":
           client.send(str.encode("3"))
-        elif data == "6":
+        elif data == "8":
           """
           Highscores dialog
           The client will see the top 5 highscores
           """
-          client.send(str.encode("6"))
-        elif data == "7":
+          client.send(str.encode("8"))
+        elif data == "9":
           """
           Game rules dialog
           The client will see the game rules
           """
-          client.send(str.encode("7"))
-        elif data == "8":
+          client.send(str.encode("9"))
+        elif data == "10":
           """
           Game
           The client will play/see a game
           """
-          client.send(str.encode("8"))
+          client.send(str.encode("10"))
           
       except:
         client.close()
