@@ -103,7 +103,7 @@ def menu_code(code, client_socket):
             client_socket.close()
             return
         else:
-            user_input = int(user_input) + 5
+            user_input = int(user_input) + 7
 
         client_socket.send(str.encode(str(user_input)))
     elif code == "4":
@@ -115,14 +115,22 @@ def menu_code(code, client_socket):
         # Show the welcome menu again
         menu_code("0", client_socket)
     elif code == "6":
+        print("Incorrect Password.\n")
+        # Show the welcome menu again
+        menu_code("0", client_socket)
+    elif code == "7":
+        print("Registration success!\n")
+        # Show the welcome menu again
+        menu_code("0", client_socket)
+    elif code == "8":
         print("\nHighscores")
         print("This feature is in development. Please check back later")
         client_socket.send(str.encode("3"))
-    elif code == "7":
+    elif code == "9":
         print("\nGame Rules")
         print("This feature is in development. Please check back later")
         client_socket.send(str.encode("3"))
-    elif code == "8":
+    elif code == "10":
         print("\nGame")
         print("This feature is in development. Please check back later")
         client_socket.send(str.encode("3"))

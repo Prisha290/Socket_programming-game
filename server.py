@@ -51,10 +51,10 @@ class ThreadedServer(object):
           else:
             # Check if password is correct
             if auth.check_user_password(username, password) == False:
-              client.send(str.encode("0"))
+              client.send(str.encode("6"))
               print("[LOGIN FAILED] Password is incorrect")
             else:
-              client.send(str.encode("3"))
+              client.send(str.encode("7"))
               print("[LOGIN SUCCESS]", username)
         elif data == "2":
           """
@@ -74,7 +74,7 @@ class ThreadedServer(object):
           else:
             # Add user to users.json
             auth.add_user(username, password)
-            # client.send(str.encode("1"))
+            client.send(str.encode("7"))
             print("[REGISTER SUCCESS]", username)
         elif data == "3":
           client.send(str.encode("3"))
