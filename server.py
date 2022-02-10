@@ -33,7 +33,15 @@ class ThreadedServer(object):
           client.close()
           break
         # Receive data from client
-        if data == "1":
+        if data == "0":
+          """
+          Welcome Menu
+          Press 1 to Login
+          Press 2 to Register
+          Type exit to disconnect
+          """
+          client.send(str.encode("0"))
+        elif data == "1":
           """
           Login dialog
           Getting Username and Password for Login

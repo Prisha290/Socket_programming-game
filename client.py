@@ -8,12 +8,9 @@ import time
 # env_port = config('PORT')
 # print(env_host, env_port)
 
-def client_program():
-    PORT = input("Enter a PORT number: ")
-    PORT = int(PORT)
+def client_program(HOST, PORT):
     try:
-        # get host name
-        HOST = socket.gethostbyname(socket.gethostname())
+        # Data packet size is 2048 bytes to be received from server
         SIZE = 2048
 
         # Socket instance
@@ -89,8 +86,6 @@ def menu_code(code, client_socket):
         # Hash the password entered by the user
         password = auth.hash_password(password)
         client_socket.send(str.encode(password))
-        time.sleep(0.5)
-        client_socket.send(str.encode("1"))
 
     elif code == "3":
         print("\nWelcome to Maze Runner")
@@ -108,20 +103,20 @@ def menu_code(code, client_socket):
         client_socket.send(str.encode(str(user_input)))
     elif code == "4":
         print("Username already exists. Please try again.\n")
-        # Show the welcome menu again
-        menu_code("0", client_socket)
+        # Send welcome menu code to server
+        client_socket.send(str.encode("0"))
     elif code == "5":
         print("Username does not exist.\n")
-        # Show the welcome menu again
-        menu_code("0", client_socket)
+        # Send welcome menu code to server
+        client_socket.send(str.encode("0"))
     elif code == "6":
         print("Incorrect Password.\n")
-        # Show the welcome menu again
-        menu_code("0", client_socket)
+        # Send welcome menu code to server
+        client_socket.send(str.encode("0"))
     elif code == "7":
         print("Registration success!\n")
-        # Show the welcome menu again
-        menu_code("0", client_socket)
+        # Send welcome menu code to server
+        client_socket.send(str.encode("0"))
     elif code == "8":
         print("\nHighscores")
         print("This feature is in development. Please check back later")
@@ -140,5 +135,14 @@ def menu_code(code, client_socket):
 
 
 if __name__ == "__main__":
-    client_program()
+    while True:
+        PORT = input("Port: ")
+        try:
+            PORT = int(PORT)
+            break
+        except ValueError:
+            print("Invalid port number")
+    # Get host name
+    HOST = socket.gethostbyname(socket.gethostname())
+    client_program(HOST, PORT)
 
