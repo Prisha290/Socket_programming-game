@@ -21,7 +21,7 @@ class ThreadedServer(object):
       threading.Thread(target = self.listen_to_client,args = (client,address)).start()
   
   def listen_to_client(self, client, address):
-    client.send(str.encode("Welcome to the server!\n"))
+    client.send(str.encode("\nWelcome to the server!\n"))
     time.sleep(0.1)
     client.send(str.encode("0"))
     SIZE = 2048

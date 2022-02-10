@@ -50,7 +50,7 @@ def menu_code(code, client_socket):
             return
         client_socket.send(str.encode(user_input))
     elif code == "1":
-        print("Login dialog")
+        print("\nLogin dialog")
         
         username = input("Username: ")
         while auth.check_username(username) == False:
@@ -70,7 +70,7 @@ def menu_code(code, client_socket):
         client_socket.send(str.encode(password))
 
     elif code == "2":
-        print("Registration dialog")
+        print("\nRegistration dialog")
 
         username = input("Username: ")
         while auth.check_username(username) == False:
@@ -92,7 +92,7 @@ def menu_code(code, client_socket):
         client_socket.send(str.encode("1"))
 
     elif code == "3":
-        print("Welcome to Maze Runner")
+        print("\nWelcome to Maze Runner")
         print("Press 1 to see highscores")
         print("Press 2 to see game rules")
         print("Press 3 to play/view a game")
@@ -114,15 +114,15 @@ def menu_code(code, client_socket):
         # Show the welcome menu again
         menu_code("0", client_socket)
     elif code == "6":
-        print("Highscores")
+        print("\nHighscores")
         print("This feature is in development. Please check back later")
         client_socket.send(str.encode("3"))
     elif code == "7":
-        print("Game Rules")
+        print("\nGame Rules")
         print("This feature is in development. Please check back later")
         client_socket.send(str.encode("3"))
     elif code == "8":
-        print("Game")
+        print("\nGame")
         print("This feature is in development. Please check back later")
         client_socket.send(str.encode("3"))
     else:
