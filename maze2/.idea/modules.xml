@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/maze2.iml" filepath="$PROJECT_DIR$/.idea/maze2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../maze2_client/.idea/maze2_client.iml" filepath="$PROJECT_DIR$/../maze2_client/.idea/maze2_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pptest/.idea/pptest.iml" filepath="$PROJECT_DIR$/../pptest/.idea/pptest.iml" />
+    </modules>
+  </component>
+</project>
