@@ -34,3 +34,7 @@ class ResponseProtocol(object):
     @staticmethod
     def response_send_difficulty(difficulty):
         return DELIMITER.join([RESPONSE_SEND_DIFFICULTY, difficulty])
+
+    @staticmethod
+    def request_exit():
+        return DELIMITER.join([REQUEST_EXIT])

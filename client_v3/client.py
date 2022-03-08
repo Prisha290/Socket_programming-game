@@ -26,6 +26,7 @@ class Client(object):
         self.register_service(RESPONSE_HIGH_SCORES, self.response_high_score_handle)
         self.register_service(REQUEST_SEND_DIFFICULTY, self.request_send_difficulty)
         self.register_service(RESPONSE_SEND_DIFFICULTY, self.response_send_difficulty_handle)
+        self.register_service(RESPONSE_EXIT, self.response_exit)
 
         self.username = None  # current client name
         self.is_running = True  # flag to show if current thread is running
@@ -62,6 +63,8 @@ class Client(object):
         Thread(target=self.response_handle).start()  # new thread for receiving data from server
         self.show_welcome_info()
 
+    def response_exit(self, response_data):
+        self.exit()
 
     def send_register_data(self):
         """Prompt user for username and password for registration and send them to the server"""
@@ -306,6 +309,8 @@ class Client(object):
 
         if response_data['response_id'] == RESPONSE_SEND_DIFFICULTY:
             response_data['difficulty'] = response_data_list[1]
+
+
 
         return response_data
 

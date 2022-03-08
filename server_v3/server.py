@@ -246,8 +246,16 @@ class Server(object):
 
         return request_data
 
+    def request_exit(self, client_soc):
+        request_data = ResponseProtocol.request_exit()
+        client_soc.send_data(request_data)
+
     def exit(self):
         """Server Disconnect"""
+        for client_soc in self.clients.values():
+            self.request_exit(client_soc)
+            client_soc.close()
+
         self.server_socket.close()
         self.is_running = False
         print("[SERVER DISCONNECTED]")
@@ -255,5 +263,8 @@ class Server(object):
 
 
 if __name__ == '__main__':
-    server = Server()
-    server.startup()
+    try:
+        server = Server()
+        server.startup()
+    except KeyboardInterrupt:
+        server.exit()

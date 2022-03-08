@@ -356,7 +356,7 @@ class Maze:
         break
 
 
-if __name__ == '__main__':
-    smaze = Maze(2)
-    smaze.generate_maze()
-    smaze.start_game()
+# if __name__ == '__main__':
+#     smaze = Maze(2)
+#     smaze.generate_maze()
+#     smaze.start_game()
