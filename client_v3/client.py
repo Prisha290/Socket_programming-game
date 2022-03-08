@@ -6,6 +6,7 @@ from Timer import *
 from client_socket import ClientSocket
 from config import *
 from request_protocol import RequestProtocol
+import getpass
 
 
 class Client(object):
@@ -66,18 +67,29 @@ class Client(object):
     def response_exit(self, response_data):
         self.exit()
 
+    @staticmethod
+    def credentials_input():
+        username = input("Username: ")
+        password = getpass.getpass()
+        # password = input("Password: ")
+
+        return username, password
+
     def send_register_data(self):
         """Prompt user for username and password for registration and send them to the server"""
-        username = input('Username: ')
-        password = input('Password: ')
-        self.username = username
-        request_text = RequestProtocol.request_register_result(username, password)
+        self.username, password = self.credentials_input()
+
+        # self.username = input("Username: ")
+        # password = getpass.getpass(prompt="Password: ")
+        request_text = RequestProtocol.request_register_result(self.username, password)
         self.conn.send_data(request_text)
 
     def send_login_data(self):
         """Prompt user for username and password for login and send them to the server"""
-        username = input('Username: ')
-        password = input('Password: ')
+        username, password = self.credentials_input()
+        # username = input('Username: ')
+        # password = input('Password: ')
+        # password = getpass.getpass(prompt="Password: ")
 
         request_text = RequestProtocol.request_login_result(username, password)
         self.conn.send_data(request_text)
