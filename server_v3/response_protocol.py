@@ -3,7 +3,6 @@ from config import *
 
 class ResponseProtocol(object):
 
-
     @staticmethod
     def response_login_result(result, username):
         return DELIMITER.join([RESPONSE_LOGIN_RESULT, result, username])

@@ -1,3 +1,4 @@
+import sys
 import threading
 import time
 from threading import Thread
@@ -28,6 +29,7 @@ class Server(object):
         self.high_scores = []  # to store global high scores
         self.difficulty_list = []  # to store the game difficulty
         self.mutex_lock = threading.Lock()  # a thread lock
+        self.is_running = True  # flag to show if current thread is running
 
     def startup(self):
         """startup the server"""
@@ -46,7 +48,7 @@ class Server(object):
 
     def request_handle(self, client_soc):
         """Create a new thread for receiving data from the client """
-        while True:
+        while self.is_running:
             recv_data = client_soc.recv_data()
             if not recv_data:
                 self.remove_offline_user(client_soc)
@@ -243,6 +245,13 @@ class Server(object):
             request_data['difficulty'] = request_list[1]
 
         return request_data
+
+    def exit(self):
+        """Server Disconnect"""
+        self.server_socket.close()
+        self.is_running = False
+        print("[SERVER DISCONNECTED]")
+        sys.exit(0)
 
 
 if __name__ == '__main__':

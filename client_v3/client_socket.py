@@ -15,7 +15,10 @@ class ClientSocket(socket.socket):
         return self.recv(512).decode('utf-8')
 
     def send_data(self, message):
-        return self.send(message.encode('utf-8'))
+        try:
+            return self.send(message.encode('utf-8'))
+        except Exception as e:
+            print("Goodbye")
 
     def exit(self):
         self.close()

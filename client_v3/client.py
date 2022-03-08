@@ -44,18 +44,24 @@ class Client(object):
 
     def response_handle(self):
         """Create a new thread for receiving data from server """
-        while self.is_running:
-            recv_data = self.conn.recv_data()
-            response_data = self.parse_response_data(recv_data)
-            handle_function = self.response_handle_function[response_data['response_id']]
-            if handle_function:
-                handle_function(response_data)
+        try:
+            while self.is_running:
+                recv_data = self.conn.recv_data()
+                response_data = self.parse_response_data(recv_data)
+                handle_function = self.response_handle_function[response_data['response_id']]
+                if handle_function:
+                    handle_function(response_data)
+
+        except OSError as e:
+            print("OSError Exception: ")
+            self.exit()
 
     def startup(self):
         """startup the client"""
         self.conn.connect()
         Thread(target=self.response_handle).start()  # new thread for receiving data from server
         self.show_welcome_info()
+
 
     def send_register_data(self):
         """Prompt user for username and password for registration and send them to the server"""
@@ -171,6 +177,7 @@ class Client(object):
         print("3. Hard")
         print("4. Insane (Please have a wide terminal window)")
         print(self.YELLOW, "Note: Please resize your terminal to the biggest size possible. Thanks :D", self.END)
+        # TODO: invalid input handle
 
         difficulty = input("-> ")
         request_text = RequestProtocol.request_send_difficulty(difficulty)
