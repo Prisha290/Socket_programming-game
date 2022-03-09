@@ -1,3 +1,4 @@
+import getpass
 import sys
 from threading import Thread
 
@@ -6,7 +7,6 @@ from Timer import *
 from client_socket import ClientSocket
 from config import *
 from request_protocol import RequestProtocol
-import getpass
 
 
 class Client(object):
@@ -17,7 +17,7 @@ class Client(object):
 
         self.response_handle_function = dict()  # response handler dictionary
 
-        # register service for the requests and responses
+        # Register service for the requests and responses
         self.register_service(RESPONSE_LOGIN_RESULT, self.response_login_handle)
         self.register_service(RESPONSE_REGISTER_RESULT, self.response_register_handle)
         self.register_service(RESPONSE_SHOW_RULE_RESULT, self.response_show_rule_handle)
@@ -33,8 +33,8 @@ class Client(object):
         self.is_running = True  # flag to show if current thread is running
 
         self.my_time_elapsed = 0  # for timer
-        self.difficulty = 0       # to store game difficulty
-        self.local_ranking = []   # to store local ranking
+        self.difficulty = 0  # to store game difficulty
+        self.local_ranking = []  # to store local ranking
 
         # colors
         self.YELLOW = "\033[1;33m"
@@ -55,7 +55,6 @@ class Client(object):
                     handle_function(response_data)
 
         except OSError as e:
-            print("OSError Exception: ")
             self.exit()
 
     def startup(self):
@@ -77,21 +76,22 @@ class Client(object):
 
     def send_register_data(self):
         """Prompt user for username and password for registration and send them to the server"""
-        self.username, password = self.credentials_input()
+        # self.username, password = self.credentials_input()
 
-        # self.username = input("Username: ")
+        self.username = input("Username: ")
+        password = input("Password: ")
         # password = getpass.getpass(prompt="Password: ")
         request_text = RequestProtocol.request_register_result(self.username, password)
         self.conn.send_data(request_text)
 
     def send_login_data(self):
         """Prompt user for username and password for login and send them to the server"""
-        username, password = self.credentials_input()
-        # username = input('Username: ')
-        # password = input('Password: ')
+        # username, password = self.credentials_input()
+        self.username = input('Username: ')
+        password = input('Password: ')
         # password = getpass.getpass(prompt="Password: ")
 
-        request_text = RequestProtocol.request_login_result(username, password)
+        request_text = RequestProtocol.request_login_result(self.username, password)
         self.conn.send_data(request_text)
 
     def request_show_rule(self):
@@ -112,10 +112,12 @@ class Client(object):
     def response_high_score_handle(self, response_data):
         """Handle request-high-score response from the server"""
         result = response_data['result']
+        print('[High Scores 🥇 🥈 🥉]')
         if not result:
-            print("Score Board is Empty Currently")
+            print("Score Board is Empty Currently.")
         else:
             print(result)
+
         self.prompt_player()
 
     def send_game_score(self, score):
@@ -133,7 +135,7 @@ class Client(object):
             print('[LOGIN FAILED] Password is incorrect')
             self.show_welcome_info()
         elif result == '0':
-            print('[LOGIN SUCCESS]')
+            print('\n[LOGIN SUCCESS] Welcome Back, ' + self.username + '!')
             self.prompt_player()
 
     def response_register_handle(self, response_data):
@@ -153,10 +155,12 @@ class Client(object):
         """Handle the play-game response from the server"""
         result = response_data['result']
         if result == '1':
-            print('Waiting another player to join the room...')
+            print('[Waiting for Player2 to Join the Room...🚀]')
 
         elif result == '2':
-            print("two players joined room")
+            print("Two Players Joined the Room, Please Select a difficulty to play the game! 👌🥰")
+            print(
+                "\n[Note]: The Server will pick the difficulty level from the players who made the decision faster! 🍗")
             self.request_send_difficulty()
 
     def response_send_difficulty_handle(self, response_data):
@@ -172,8 +176,14 @@ class Client(object):
 
     def command_start_handle(self, response_data):
         """Request to start game and send the command to the server"""
-        maze = Maze(self.difficulty)
-        maze.generate_maze()
+        level = 'easy'  # default difficulty level
+        if self.difficulty == 1:
+            level = 'easy'
+        elif self.difficulty == 2:
+            level = 'medium'
+        elif self.difficulty == 3:
+            level = 'hard'
+        maze = Maze(level)
 
         timer = Timer()
         timer.start()
@@ -187,14 +197,21 @@ class Client(object):
     def request_send_difficulty(self):
         """request to send game difficulty to the server"""
         print("\nSelect Difficulty: ")
-        print("1. Easy")
-        print("2. Medium")
-        print("3. Hard")
-        print("4. Insane (Please have a wide terminal window)")
-        print(self.YELLOW, "Note: Please resize your terminal to the biggest size possible. Thanks :D", self.END)
-        # TODO: invalid input handle
+        print("1. Easy    😊")
+        print("2. Medium  🤪")
+        print("3. Hard    😱\n")
+        # print("4. Insane (Please have a wide terminal window)")
+        # print(self.YELLOW, "Note: Please resize your terminal to the biggest size possible. Thanks :D", self.END)
 
         difficulty = input("-> ")
+
+        while difficulty not in ['1', '2', '3']:
+            print("\nSelect Difficulty: ")
+            print("1. Easy    😊")
+            print("2. Medium  🤪")
+            print("3. Hard    😱\n")
+            difficulty = input("-> ")
+
         request_text = RequestProtocol.request_send_difficulty(difficulty)
         self.conn.send_data(request_text)
 
@@ -205,23 +222,23 @@ class Client(object):
         message = ''
 
         if str(self.my_time_elapsed) == result:
-            message += "You won!"
+            message += "You won! 💯 🥰"
         else:
-            message += "You lost, the winner's total time is " + result + ' second.'
+            message += "You Lost 😭, The Winner's Total Time is " + result + ' Seconds.'
         print(message)
         self.prompt_player()
 
     def prompt_player(self):
         """Prompt player for actions"""
         print('\n')
-        print("=================================================")
-        print("|    Press 0 to see high scores (local ranking)  |")
-        print("|    Press 1 to see high scores (network ranking)|")
-        print("|    Press 2 to see game rules                   |")
-        print("|    Press 3 to play a game (2 player)           |")
-        print("|    Press 4 to play a game (1 player)           |")
-        print("|    Type q to disconnect                        |")
-        print("=================================================")
+        print("==================================================")
+        print("|   Press 0 to see high scores [Local Ranking]   |")
+        print("|   Press 1 to see high scores [Network Ranking] |")
+        print("|   Press 2 to see game rules                    |")
+        print("|   Press 3 to play a game 🏃 🏃 players         |")
+        print("|   Press 4 to play a game 🏃 player             |")
+        print("|   Type q to disconnect                         |")
+        print("==================================================")
         user_input = input(' -> ')
         if user_input == 'q':
             self.exit()
@@ -240,28 +257,42 @@ class Client(object):
 
     def show_local_ranking(self):
         """Show local game ranking"""
+        print('[High Scores 🥇 🥈 🥉]')
         if not self.local_ranking:
-            print('Score Board is Empty Currently')
-        for score in self.local_ranking:
-            print(score)
+            print('Score Board is Empty Currently.')
+        else:
+            for score in self.local_ranking:
+                print(score)
 
         self.prompt_player()
 
     def start_one_player_game(self):
         """start the game for one player"""
         print("\nSelect Difficulty: ")
-        print("1. Easy")
-        print("2. Medium")
-        print("3. Hard")
-        print("4. Insane (Please have a wide terminal window)")
-        print(self.YELLOW, "Note: Please resize your terminal to the biggest size possible. Thanks :D", self.END)
+        print("1. Easy    😊")
+        print("2. Medium  🤪")
+        print("3. Hard    😱\n")
+        # print("4. Insane (Please have a wide terminal window)")
+        # print(self.YELLOW, "Note: Please resize your terminal to the biggest size possible. Thanks :D", self.END)
 
         difficulty = input("-> ")
 
-        # TODO: handle invalid input
+        while difficulty not in ['1', '2', '3']:
+            print("\nSelect Difficulty: ")
+            print("1. Easy    😊")
+            print("2. Medium  🤪")
+            print("3. Hard    😱\n")
+            difficulty = input("-> ")
 
-        maze = Maze(int(difficulty))
-        maze.generate_maze()
+        level = 'easy'  # default difficulty level
+        if difficulty == '1':
+            level = 'easy'
+        elif difficulty == '2':
+            level = 'medium'
+        elif difficulty == '3':
+            level = 'hard'
+
+        maze = Maze(level)
 
         timer = Timer()
         timer.start()
@@ -275,12 +306,13 @@ class Client(object):
 
     def show_welcome_info(self):
         """Show welcome info to the standard output """
-        print('\n============================')
-        print('|   Welcome Menu            |')
-        print('|   Press 1 to Login        |')
-        print('|   Press 2 to Register     |')
-        # print('|   Type q to disconnect    |')
-        print('=============================')
+        print('\n')
+        print('============================')
+        print('|  🎉 Welcome Menu 🎉      |')
+        print('|  Press 1 to Login     🎲 |')
+        print('|  Press 2 to Register  ⛄ |')
+        # print('|  Type q to disconnect 👋 |')
+        print('============================')
 
         request_handle = input('-> ')
         if request_handle == '1':
@@ -290,7 +322,18 @@ class Client(object):
         # elif request_handle == 'q' or not request_handle:
         #     self.exit()
         else:
-            self.show_welcome_info()
+            print('Please enter a valid number. 🥺')
+
+        while request_handle not in ['1', '2']:
+            request_handle = input('-> ')
+            if request_handle == '1':
+                self.send_login_data()
+            elif request_handle == '2':
+                self.send_register_data()
+            elif request_handle == 'q' or not request_handle:
+                self.exit()
+            else:
+                print('Please enter a valid number. 🥺')
 
     @staticmethod
     def parse_response_data(recv_data):
@@ -322,15 +365,13 @@ class Client(object):
         if response_data['response_id'] == RESPONSE_SEND_DIFFICULTY:
             response_data['difficulty'] = response_data_list[1]
 
-
-
         return response_data
 
     def exit(self):
         """Client Disconnect"""
+        print('\nGoodbye! 👋')
         self.conn.close()
         self.is_running = False
-        print("[CLIENT DISCONNECTED]")
         sys.exit(0)
 
 

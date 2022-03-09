@@ -1,7 +1,0 @@
-{
-  "easy":  "[[],[]]",
-  "medium": "[[], []]",
-  "hard": "[[],[]]"
-}
-
-//from ast import literal_eval

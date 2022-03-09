@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3e65ed0-e668-41c5-a5b6-e309e86888e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server_v3/maze.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client_v3/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_v3/client_socket.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/client_socket.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_v3/maze.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_v3/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server_v3/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_v3/socket_wrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/server_v3/socket_wrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_v3/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/server_v3/users.json" afterDir="false" />
     </list>
     <list id="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" name="Changes by nirmalya" comment="">
-      <change beforePath="$PROJECT_DIR$/client_v3/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_v3/Maze.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/Maze.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,16 +20,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/client_v3/client.py">
-      <ranges>
-        <range start1="8" end1="8" start2="8" end2="9" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
-        <range start1="67" end1="67" start2="68" end2="76" changelist="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" />
-        <range start1="70" end1="74" start2="79" end2="84" changelist="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" />
-        <range start1="78" end1="80" start2="88" end2="92" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
-      </ranges>
-    </file>
   </component>
   <component name="ProjectId" id="267M5jlhFxQ3Nj8TsIkkAtrtyMk" />
   <component name="ProjectLevelVcsManager">
@@ -103,7 +97,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1646769990319</updated>
-      <workItem from="1646769991727" duration="5816000" />
+      <workItem from="1646769991727" duration="7281000" />
+      <workItem from="1646780837687" duration="112000" />
+      <workItem from="1646853507077" duration="13296000" />
     </task>
     <servers />
   </component>
@@ -120,9 +116,10 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/maze_runner$server.coverage" NAME="server Coverage Results" MODIFIED="1646775809933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server_v3" />
-    <SUITE FILE_PATH="coverage/maze_runner$client.coverage" NAME="client Coverage Results" MODIFIED="1646775826169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client_v3" />
+    <SUITE FILE_PATH="coverage/maze_runner$server.coverage" NAME="server Coverage Results" MODIFIED="1646866869654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server_v3" />
+    <SUITE FILE_PATH="coverage/maze_runner$client.coverage" NAME="client Coverage Results" MODIFIED="1646866878475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client_v3" />
   </component>
 </project>

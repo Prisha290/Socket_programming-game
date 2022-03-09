@@ -6,7 +6,7 @@ class SocketWrapper(object):
     def recv_data(self):
 
         try:
-            return self.socket.recv(512).decode('utf-8')
+            return self.socket.recv(1024).decode('utf-8')
         except:
             return ""
 

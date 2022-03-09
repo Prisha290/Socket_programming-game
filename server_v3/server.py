@@ -34,9 +34,9 @@ class Server(object):
     def startup(self):
         """startup the server"""
         while True:
-            print("Connecting to client...")
+            print("[SERVER] Started ...")
             soc, addr = self.server_socket.accept()
-            print('Accepted', addr)
+            print('[SERVER] Client Connection received: ', addr)
 
             client_soc = SocketWrapper(soc)  # init the client sockets
 
@@ -63,7 +63,7 @@ class Server(object):
 
     def request_send_difficulty_handle(self, client_soc, request_data):
         """Handle the send-difficulty request from the server"""
-        print("REQUEST SELECT DIFFICULTY RECEIVED")
+        print("[SERVER] REQUEST SELECT-DIFFICULTY RECEIVED.")
         difficulty = request_data['difficulty']
 
         int_difficulty = int(difficulty)
@@ -75,15 +75,13 @@ class Server(object):
             time.sleep(0.1)
 
         response_difficulty = str(self.difficulty_list[0])
-
-        print("send diff", response_difficulty)
-
         response_text = ResponseProtocol.response_send_difficulty(response_difficulty)
         client_soc.send_data(response_text)
-        print("RESPONSE SELECT DIFFICULTY SENT")
+        print("[SERVER] RESPONSE SELECT DIFFICULTY SENT.")
 
     def request_register_handle(self, client_soc, request_data):
         """Handle the register request from the client"""
+        print("[SERVER] REQUEST REGISTER RECEIVED.")
         username = request_data['username']
         password = request_data['password']
         result, username = self.register_user(username, password)
@@ -94,18 +92,24 @@ class Server(object):
     def register_user(self, username, password):
         """Register user to database"""
         auth.add_user(username, password)
-        print("[REGISTER SUCCESS FOR]", username)
+        print("[SERVER] REGISTRATION SUCCESS FOR\n[USER]: ", username, end='')
+        print('\n[Hashed password]: ', auth.hash_password(password))
         return '0', username
 
     def request_login_handle(self, client_soc, request_data):
         """Handle the login request from the server"""
+        print("[SERVER] REQUEST LOGIN RECEIVED.")
         username = request_data['username']
         password = request_data['password']
         result, username = self.check_user_login(username, password)
         if result == '0':
             self.clients[username] = {'sock': client_soc, 'username': username}
 
-            print('Current online client: ', self.clients)
+            print('[SERVER] Current online clients: ', end=' ')
+            names = list(self.clients.keys())
+            for name in names:
+                print(name, end=', ')
+            print()
 
         response_text = ResponseProtocol.response_login_result(result, username)
         client_soc.send_data(response_text)
@@ -124,19 +128,20 @@ class Server(object):
 
     def request_show_rule_handle(self, client_soc, request_data):
         """Handle the show-rules request from server"""
+        print("[SERVER] REQUEST SHOW-RULES RECEIVED.")
         rules = ""
-        rules += "Game Rules\n"
-        rules += "\nDisplay:"
-        rules += "\nEach game, your position in the maze is indicated by 🏃\n 🏁 indicates the exit.\n"
-        rules += "\nInstructions:"
-        rules += ("\nPress \"W\" to go up, \"A\" to go left, \"S\" to go down, "
-                  + "and \"D\" to go right. You\nwon't be able to move if you hit "
-                  + "a wall. Your goal is to reach the exit point\n")
-        rules += "\nScores:"
-        rules += ("\nThe time you spent on each round is your score. A timer "
-                  + "will start when the\ngame begins and stop as soon as you "
-                  + "reach the exit point. Your best score\nwill be updated to "
-                  + "the record board where you may visit from Game Menu.")
+        rules += "\n🧚 GAME RULES\n"
+        rules += "\n🚩 Display:"
+        rules += "\nEach game, your position in the maze is indicated by 🏃 and 🏁 indicates the exit.\n"
+        rules += "\n🚩 Instructions"
+        rules += ("\n\" W\" to go ⬆\n \"A\" to go ⬅\n \"S\" to go ⬇\n "
+                  + "\"D\" to go ➡ \nYou won't be able to move if you hit "
+                  + "a wall. \nYour goal is to reach the exit point 🤩\n")
+        rules += "\n🚩 Scores:"
+        rules += ("\nThe time you spent on each round is your score. \nA ⏰ "
+                  + "will start when the game begins and stop as soon as you "
+                  + "reach the exit point. \nYour best score 🏅 will be updated to "
+                  + "the record board 💯 where you may visit from Game Menu.")
 
         result = '0'
         response_text = ResponseProtocol.response_show_rule_result(rules)
@@ -144,8 +149,9 @@ class Server(object):
 
     def request_play_game_handle(self, client_soc, request_data):
         """Handle the play-game request from the client"""
+        print("[SERVER] REQUEST PLAY-GAME-2PLAYER RECEIVED.")
         self.room += 1
-        """0004|num of player in room"""
+        """0004|number of players in room"""
         if self.room == 1:
 
             response_text = ResponseProtocol.response_play_game_result('1')
@@ -164,11 +170,13 @@ class Server(object):
 
     def command_start_game(self, client_soc):
         """Request client to start the game"""
+        print("[SERVER] COMMAND START 2PLAYER GAME SENT.")
         response_text = ResponseProtocol.command_start_game()
         client_soc.send_data(response_text)
 
     def request_send_score_handle(self, client_soc, request_data):
         """Handle the send-score-request from the client """
+        print("[SERVER] REQUEST SEND-SCORE RECEIVED.")
         score = request_data['score']
         float_score = float(score)
 
@@ -194,18 +202,9 @@ class Server(object):
         response_text = ResponseProtocol.response_send_score(str(response_score))
         client_soc.send_data(response_text)
 
-    def request_update_record(self):
-        """pass"""
-        self.higher_score.clear()
-        self.high_scores.append(self.higher_score[0])
-        self.high_scores.append(self.higher_score[1])
-
-        self.high_scores.sort()
-        self.room = 0
-        self.higher_score = []
-
     def request_high_scores_handle(self, client_soc, request_data):
         """Handle the high-score request from the client"""
+        print("[SERVER] REQUEST SHOW-HIGH-SCORES RECEIVED.")
         message = ""
         for i in range(len(self.high_scores)):
             message += str(self.high_scores[i]) + "\n"
@@ -214,15 +213,15 @@ class Server(object):
 
     def remove_offline_user(self, client_soc):
         """Remove offline users"""
-        print('A client logout.')
         for username, info in self.clients.items():
             if info['sock'] == client_soc:
+                print('[SERVER] Client ' + info['username'] + ' Logout.')
                 del self.clients[username]
-                print(self.clients)
                 break
 
     def parse_request_text(self, text):
         """Deserialize the request from the client"""
+        print('[SERVER] Deserializing the request from client...')
         request_list = text.split(DELIMITER)
 
         request_data = dict()
@@ -263,8 +262,8 @@ class Server(object):
 
 
 if __name__ == '__main__':
+    server = Server()
     try:
-        server = Server()
         server.startup()
     except KeyboardInterrupt:
         server.exit()
