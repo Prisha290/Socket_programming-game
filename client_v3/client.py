@@ -53,12 +53,12 @@ class Client(object):
                 if handle_function:
                     handle_function(response_data)
 
-        except OSError:
+        except OSError or KeyError:
             print("Connection lost to server")
             # TODO: Terminate program here
             # sys.exit()
             # print("After sys exit in OSError except block")
-            # self.exit()
+            self.exit()
 
     def startup(self):
         """startup the client"""
