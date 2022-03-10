@@ -17,8 +17,8 @@ class ClientSocket(socket.socket):
     def send_data(self, message):
         try:
             return self.send(message.encode('utf-8'))
-        except Exception as e:
-            print("Goodbye")
+        except OSError:
+            print("Server closed connection")
 
     def exit(self):
         self.close()

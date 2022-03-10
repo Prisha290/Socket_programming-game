@@ -1,23 +1,23 @@
 # Maze generator -- Randomized Prim Algorithm
-
-
-import os
-import random
 import json
+import os
+
 
 class Maze:
-
     def __init__(self, game_difficulty):
         with open('levels.json', 'r') as json_file:
-          data = json_file.read()
+            data = json_file.read()
         obj = json.loads(data)
         self.maze = obj[game_difficulty]
+
         # Player position
         self.player_posX = 0
         self.player_posY = 1
+
         # Finish position
         self.finish_posX = len(self.maze) - 1
         self.finish_posY = len(self.maze[0]) - 2
+
         # Maze Emoji's
         self.MAZE_WALL = "\U0001F7E8"
         self.FINISH = "\U0001F3C1"
@@ -82,9 +82,10 @@ class Maze:
                     self.print_maze()
                     continue
                 else:
-                    self.maze[self.player_posX][self.player_posY], self.maze[x_move][self.player_posY] = self.maze[x_move][
+                    self.maze[self.player_posX][self.player_posY], self.maze[x_move][self.player_posY] = \
+                    self.maze[x_move][
                         self.player_posY], \
-                        self.maze[
+                    self.maze[
                         self.player_posX][
                         self.player_posY]
                     self.player_posX = x_move
@@ -111,9 +112,10 @@ class Maze:
                     self.print_maze()
                     continue
                 else:
-                    self.maze[self.player_posX][self.player_posY], self.maze[x_move][self.player_posY] = self.maze[x_move][
+                    self.maze[self.player_posX][self.player_posY], self.maze[x_move][self.player_posY] = \
+                    self.maze[x_move][
                         self.player_posY], \
-                        self.maze[
+                    self.maze[
                         self.player_posX][
                         self.player_posY]
                     self.player_posX = x_move
@@ -129,7 +131,6 @@ class Maze:
             if self.maze[self.player_posX][self.player_posY] == self.maze[self.finish_posX][self.finish_posY]:
                 print("You finished! 🤩")
                 break
-
 
 # if __name__ == '__main__':
 #     smaze = Maze("medium")  # hard mode doesnt work

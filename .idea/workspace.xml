@@ -2,17 +2,79 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3e65ed0-e668-41c5-a5b6-e309e86888e4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/client_v3/Maze_Random.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_v3/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server_v3/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_v3/Maze.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/Maze.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_v3/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_v3/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_v3/request_protocol.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/request_protocol.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_v3/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/server_v3/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_v3/response_protocol.py" beforeDir="false" afterPath="$PROJECT_DIR$/server_v3/response_protocol.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_v3/server_socket.py" beforeDir="false" afterPath="$PROJECT_DIR$/server_v3/server_socket.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_v3/socket_wrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/server_v3/socket_wrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_v3/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/server_v3/users.json" afterDir="false" />
     </list>
-    <list id="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" name="Changes by nirmalya" comment="" />
+    <list id="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" name="Changes by nirmalya" comment="">
+      <change beforePath="$PROJECT_DIR$/client_v3/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_v3/client_socket.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/client_socket.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/client_v3/client.py">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="3" changelist="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" />
+        <range start1="4" end1="6" start2="5" end2="5" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="8" end1="8" start2="7" end2="9" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="9" end1="9" start2="10" end2="11" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="12" end1="13" start2="14" end2="14" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="14" end1="15" start2="15" end2="15" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="16" end1="17" start2="16" end2="16" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="57" end1="57" start2="56" end2="58" changelist="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" />
+        <range start1="61" end1="64" start2="62" end2="70" changelist="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" />
+        <range start1="116" end1="117" start2="122" end2="123" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="187" end1="187" start2="193" end2="195" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="197" end1="198" start2="205" end2="206" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="203" end1="204" start2="211" end2="212" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="208" end1="212" start2="216" end2="217" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="241" end1="241" start2="246" end2="247" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="242" end1="242" start2="248" end2="251" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="254" end1="256" start2="263" end2="263" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="261" end1="262" start2="268" end2="269" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="269" end1="270" start2="276" end2="277" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="275" end1="276" start2="282" end2="283" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="280" end1="284" start2="287" end2="288" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="295" end1="295" start2="299" end2="300" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="313" end1="314" start2="318" end2="319" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="317" end1="317" start2="322" end2="326" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="321" end1="323" start2="330" end2="332" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="325" end1="336" start2="334" end2="334" changelist="b3e65ed0-e668-41c5-a5b6-e309e86888e4" />
+        <range start1="371" end1="371" start2="369" end2="371" changelist="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" />
+        <range start1="373" end1="373" start2="373" end2="374" changelist="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" />
+        <range start1="374" end1="375" start2="375" end2="376" changelist="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" />
+      </ranges>
+    </file>
   </component>
   <component name="ProjectId" id="267M5jlhFxQ3Nj8TsIkkAtrtyMk" />
   <component name="ProjectLevelVcsManager">
@@ -28,9 +90,10 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Python.server">
+  <component name="RunManager" selected="Python.client">
     <configuration name="client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="maze-runner" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -77,8 +140,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.server" />
         <item itemvalue="Python.client" />
+        <item itemvalue="Python.server" />
       </list>
     </recent_temporary>
   </component>
@@ -93,7 +156,8 @@
       <workItem from="1646769991727" duration="7281000" />
       <workItem from="1646780837687" duration="112000" />
       <workItem from="1646853507077" duration="14288000" />
-      <workItem from="1646871219326" duration="1335000" />
+      <workItem from="1646871219326" duration="7375000" />
+      <workItem from="1646890051216" duration="4051000" />
     </task>
     <servers />
   </component>
@@ -112,8 +176,44 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/client_v3/client.py</url>
+          <line>374</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/client_v3/client.py</url>
+          <line>371</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/client_v3/client.py</url>
+          <line>372</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/client_v3/client.py</url>
+          <line>373</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/client_v3/client.py</url>
+          <line>370</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/client_v3/client.py</url>
+          <line>375</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/maze_runner$server.coverage" NAME="server Coverage Results" MODIFIED="1646872480222" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server_v3" />
-    <SUITE FILE_PATH="coverage/maze_runner$client.coverage" NAME="client Coverage Results" MODIFIED="1646866918789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client_v3" />
+    <SUITE FILE_PATH="coverage/maze_runner$server.coverage" NAME="server Coverage Results" MODIFIED="1646893428744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server_v3" />
+    <SUITE FILE_PATH="coverage/maze_runner$client.coverage" NAME="client Coverage Results" MODIFIED="1646893431268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client_v3" />
   </component>
 </project>

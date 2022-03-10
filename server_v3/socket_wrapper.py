@@ -1,10 +1,12 @@
+import sys
+
+
 class SocketWrapper(object):
 
     def __init__(self, socket):
         self.socket = socket
 
     def recv_data(self):
-
         try:
             return self.socket.recv(1024).decode('utf-8')
         except:
@@ -15,3 +17,4 @@ class SocketWrapper(object):
 
     def close(self):
         self.socket.close()
+
