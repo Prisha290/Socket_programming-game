@@ -1,6 +1,6 @@
 import getpass
 import sys
-import os
+import os, signal
 from threading import Thread
 
 from client_socket import ClientSocket
@@ -53,10 +53,12 @@ class Client(object):
                 if handle_function:
                     handle_function(response_data)
 
-        except OSError as e:
+        except OSError:
             print("Connection lost to server")
             # TODO: Terminate program here
-            self.exit()
+            # sys.exit()
+            # print("After sys exit in OSError except block")
+            # self.exit()
 
     def startup(self):
         """startup the client"""
@@ -368,12 +370,13 @@ class Client(object):
     def exit(self):
         """Client Disconnect"""
         # TODO: Fix this - prints twice
-        sys.exit(1)
-        print('\nGoodbye! 👋')
+        # os.kill()
         self.conn.close()
-        print("Connection should be closed now")
         self.is_running = False
-        print("It should exit by now")
+        print('\nGoodbye! 👋')
+        # sys.exit(1)
+        # Kill the current process in Linux
+        os.kill(os.getpid(), signal.SIGKILL)
 
 
 if __name__ == '__main__':
