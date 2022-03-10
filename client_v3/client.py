@@ -62,11 +62,8 @@ class Client(object):
                 if handle_function:
                     handle_function(response_data)
 
-        except OSError or KeyError:
+        except (OSError, KeyError):
             print("Connection lost to server")
-            # TODO: Terminate program here
-            # sys.exit()
-            # print("After sys exit in OSError except block")
             self.exit()
 
     def startup(self):
@@ -83,7 +80,6 @@ class Client(object):
     def response_exit(self, response_data):
         self.exit()
 
-    @staticmethod
     def credentials_input(self):
         self.username = input("Username: ")
         password = getpass.getpass()
@@ -348,13 +344,13 @@ class Client(object):
         response_data = dict()
         response_data['response_id'] = response_data_list[0]
 
-        if response_data['response_id'] == (RESPONSE_LOGIN_RESULT or RESPONSE_REGISTER_RESULT):
+        if response_data['response_id'] == RESPONSE_LOGIN_RESULT:
             response_data['result'] = response_data_list[1]
             response_data['username'] = response_data_list[2]
 
-        # if response_data['response_id'] == RESPONSE_REGISTER_RESULT:
-        #     response_data['result'] = response_data_list[1]
-        #     response_data['username'] = response_data_list[2]
+        if response_data['response_id'] == RESPONSE_REGISTER_RESULT:
+            response_data['result'] = response_data_list[1]
+            response_data['username'] = response_data_list[2]
 
         if response_data['response_id'] == RESPONSE_SHOW_RULE_RESULT:
             response_data['result'] = response_data_list[1]
