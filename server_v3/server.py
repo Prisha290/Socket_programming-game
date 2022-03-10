@@ -75,6 +75,7 @@ class Server(object):
             time.sleep(0.1)
 
         response_difficulty = str(self.difficulty_list[0])
+        print('[SERVER] Serializing Response Difficulty data ...')
         response_text = ResponseProtocol.response_send_difficulty(response_difficulty)
         client_soc.send_data(response_text)
         print("[SERVER] RESPONSE SELECT DIFFICULTY SENT.")
@@ -86,8 +87,10 @@ class Server(object):
         password = request_data['password']
         result, username = self.register_user(username, password)
         if result == '0':
+            print('[SERVER] Serializing Response Registration Data...')
             response_text = ResponseProtocol.response_register_result(result, username)
             client_soc.send_data(response_text)
+            print("[SERVER] RESPONSE REGISTER SENT.")
 
     def register_user(self, username, password):
         """Register user to database"""
@@ -105,20 +108,20 @@ class Server(object):
         if result == '0':
             self.clients[username] = {'sock': client_soc, 'username': username}
 
-            print('[SERVER] Current online clients: ', end=' ')
+            print('[SERVER] Current login players: ', end=' ')
             names = list(self.clients.keys())
             for name in names:
                 print(name, end=', ')
             print()
-
+        print('[SERVER] Serializing Response Login Data...')
         response_text = ResponseProtocol.response_login_result(result, username)
         client_soc.send_data(response_text)
+        print("[SERVER] RESPONSE LOGIN SENT.")
 
     def check_user_login(self, username, password):
         """Check the user login"""
         # check if username in users.json
         if not auth.check_user_exist(username):
-            print('not exist')
             # -1 user not exits
             return '-1', username
             # username or password wrong
@@ -143,9 +146,10 @@ class Server(object):
                   + "reach the exit point. \nYour best score 🏅 will be updated to "
                   + "the record board 💯 where you may visit from Game Menu.")
 
-        result = '0'
+        print('[SERVER] Serializing Response Show Rules Data...')
         response_text = ResponseProtocol.response_show_rule_result(rules)
         client_soc.send_data(response_text)
+        print("[SERVER] RESPONSE SHOW-RULES SENT.")
 
     def request_play_game_handle(self, client_soc, request_data):
         """Handle the play-game request from the client"""
@@ -163,16 +167,17 @@ class Server(object):
                     client_soc.send_data(response_text)
                     break
 
-
         else:
             response_text = ResponseProtocol.response_play_game_result('2')
             client_soc.send_data(response_text)
+            print("[SERVER] RESPONSE SELECT-2PLAY-GAME SENT.")
 
     def command_start_game(self, client_soc):
         """Request client to start the game"""
-        print("[SERVER] COMMAND START 2PLAYER GAME SENT.")
+        print('[SERVER] Serializing Response Start Game Data...')
         response_text = ResponseProtocol.command_start_game()
         client_soc.send_data(response_text)
+        print("[SERVER] RESPONSE START-2PLAYER-GAME SENT.")
 
     def request_send_score_handle(self, client_soc, request_data):
         """Handle the send-score-request from the client """
@@ -198,9 +203,10 @@ class Server(object):
 
         response_score = self.higher_score[0]
         self.room = 0
-
+        print('[SERVER] Serializing Response Send Score Data...')
         response_text = ResponseProtocol.response_send_score(str(response_score))
         client_soc.send_data(response_text)
+        print("[SERVER] RESPONSE SCORE SENT.")
 
     def request_high_scores_handle(self, client_soc, request_data):
         """Handle the high-score request from the client"""
@@ -208,8 +214,10 @@ class Server(object):
         message = ""
         for i in range(len(self.high_scores)):
             message += str(self.high_scores[i]) + "\n"
+        print('[SERVER] Serializing Response High Scores Data...')
         response_text = ResponseProtocol.response_high_score(message)
         client_soc.send_data(response_text)
+        print("[SERVER] RESPONSE HIGH-SCORES SENT.")
 
     def remove_offline_user(self, client_soc):
         """Remove offline users"""
@@ -218,10 +226,17 @@ class Server(object):
                 print('[SERVER] Client ' + info['username'] + ' Logout.')
                 del self.clients[username]
                 break
+        print('[SERVER] Current online clients: ', end=' ')
+        if not self.clients:
+            print("All clients logged out.")
+        names = list(self.clients.keys())
+        for name in names:
+            print(name, end=', ')
+        print()
 
     def parse_request_text(self, text):
         """Deserialize the request from the client"""
-        print('[SERVER] Deserializing the request from client...')
+        print('[SERVER] Deserializing Request Data from client...')
         request_list = text.split(DELIMITER)
 
         request_data = dict()
@@ -248,6 +263,7 @@ class Server(object):
     def request_exit(self, client_soc):
         request_data = ResponseProtocol.request_exit()
         client_soc.send_data(request_data)
+        print("[SERVER] INFORM EXIT SENT.")
 
     def exit(self):
         """Server Disconnect"""
