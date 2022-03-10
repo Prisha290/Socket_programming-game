@@ -84,19 +84,19 @@ class Client(object):
 
     def send_register_data(self):
         """Prompt user for username and password for registration and send them to the server"""
-        # self.username, password = self.credentials_input()
+        self.username, password = self.credentials_input()
 
-        self.username = input("Username: ")
-        password = input("Password: ")
+        # self.username = input("Username: ")
+        # password = input("Password: ")
         # password = getpass.getpass(prompt="Password: ")
         request_text = RequestProtocol.request_register_result(self.username, password)
         self.conn.send_data(request_text)
 
     def send_login_data(self):
         """Prompt user for username and password for login and send them to the server"""
-        # username, password = self.credentials_input()
-        self.username = input('Username: ')
-        password = input('Password: ')
+        username, password = self.credentials_input()
+        # self.username = input('Username: ')
+        # password = input('Password: ')
         # password = getpass.getpass(prompt="Password: ")
 
         request_text = RequestProtocol.request_login_result(self.username, password)
@@ -342,13 +342,13 @@ class Client(object):
         response_data = dict()
         response_data['response_id'] = response_data_list[0]
 
-        if response_data['response_id'] == RESPONSE_LOGIN_RESULT:
+        if response_data['response_id'] == (RESPONSE_LOGIN_RESULT or RESPONSE_REGISTER_RESULT):
             response_data['result'] = response_data_list[1]
             response_data['username'] = response_data_list[2]
 
-        if response_data['response_id'] == RESPONSE_REGISTER_RESULT:
-            response_data['result'] = response_data_list[1]
-            response_data['username'] = response_data_list[2]
+        # if response_data['response_id'] == RESPONSE_REGISTER_RESULT:
+        #     response_data['result'] = response_data_list[1]
+        #     response_data['username'] = response_data_list[2]
 
         if response_data['response_id'] == RESPONSE_SHOW_RULE_RESULT:
             response_data['result'] = response_data_list[1]
