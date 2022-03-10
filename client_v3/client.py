@@ -1,6 +1,7 @@
 import getpass
 import sys
-import os, signal
+import os
+import signal
 from threading import Thread
 
 from client_socket import ClientSocket
@@ -17,15 +18,23 @@ class Client(object):
         self.response_handle_function = dict()  # response handler dictionary
 
         # Register service for the requests and responses
-        self.register_service(RESPONSE_LOGIN_RESULT, self.response_login_handle)
-        self.register_service(RESPONSE_REGISTER_RESULT, self.response_register_handle)
-        self.register_service(RESPONSE_SHOW_RULE_RESULT, self.response_show_rule_handle)
-        self.register_service(RESPONSE_PLAY_GAME, self.response_play_game_handle)
+        self.register_service(RESPONSE_LOGIN_RESULT,
+                              self.response_login_handle)
+        self.register_service(RESPONSE_REGISTER_RESULT,
+                              self.response_register_handle)
+        self.register_service(RESPONSE_SHOW_RULE_RESULT,
+                              self.response_show_rule_handle)
+        self.register_service(RESPONSE_PLAY_GAME,
+                              self.response_play_game_handle)
         self.register_service(COMMAND_START, self.command_start_handle)
-        self.register_service(RESPONSE_SEND_SCORE, self.response_send_score_handle)
-        self.register_service(RESPONSE_HIGH_SCORES, self.response_high_score_handle)
-        self.register_service(REQUEST_SEND_DIFFICULTY, self.request_send_difficulty)
-        self.register_service(RESPONSE_SEND_DIFFICULTY, self.response_send_difficulty_handle)
+        self.register_service(RESPONSE_SEND_SCORE,
+                              self.response_send_score_handle)
+        self.register_service(RESPONSE_HIGH_SCORES,
+                              self.response_high_score_handle)
+        self.register_service(REQUEST_SEND_DIFFICULTY,
+                              self.request_send_difficulty)
+        self.register_service(RESPONSE_SEND_DIFFICULTY,
+                              self.response_send_difficulty_handle)
         self.register_service(RESPONSE_EXIT, self.response_exit)
 
         self.username = None  # current client name
@@ -64,42 +73,38 @@ class Client(object):
         """startup the client"""
         try:
             self.conn.connect()
-            Thread(target=self.response_handle).start()  # new thread for receiving data from server
+            # new thread for receiving data from server
+            Thread(target=self.response_handle).start()
             self.show_welcome_info()
         # Handle exception when server is not online
         except ConnectionRefusedError:
             print("Server is not online. Please check back later")
 
-
     def response_exit(self, response_data):
         self.exit()
 
     @staticmethod
-    def credentials_input():
-        username = input("Username: ")
+    def credentials_input(self):
+        self.username = input("Username: ")
         password = getpass.getpass()
         # password = input("Password: ")
 
-        return username, password
+        return password
 
     def send_register_data(self):
         """Prompt user for username and password for registration and send them to the server"""
-        self.username, password = self.credentials_input()
+        password = self.credentials_input()
 
-        # self.username = input("Username: ")
-        # password = input("Password: ")
-        # password = getpass.getpass(prompt="Password: ")
-        request_text = RequestProtocol.request_register_result(self.username, password)
+        request_text = RequestProtocol.request_register_result(
+            self.username, password)
         self.conn.send_data(request_text)
 
     def send_login_data(self):
         """Prompt user for username and password for login and send them to the server"""
-        self.username, password = self.credentials_input()
-        # self.username = input('Username: ')
-        # password = input('Password: ')
-        # password = getpass.getpass(prompt="Password: ")
+        password = self.credentials_input()
 
-        request_text = RequestProtocol.request_login_result(self.username, password)
+        request_text = RequestProtocol.request_login_result(
+            self.username, password)
         self.conn.send_data(request_text)
 
     def request_show_rule(self):
@@ -166,7 +171,8 @@ class Client(object):
             print('[Waiting for Player2 to Join the Room...🚀]')
 
         elif result == '2':
-            print("Two Players Joined the Room, Please Select a difficulty to play the game! 👌🥰")
+            print(
+                "Two Players Joined the Room, Please Select a difficulty to play the game! 👌🥰")
             print(
                 "\n[Note]: The Server will pick the difficulty level from the players who made the decision faster! 🍗")
             self.request_send_difficulty()
