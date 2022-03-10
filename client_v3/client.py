@@ -89,7 +89,7 @@ class Client(object):
 
     def send_register_data(self):
         """Prompt user for username and password for registration and send them to the server"""
-        password = self.credentials_input(self)
+        password = self.credentials_input()
 
         request_text = RequestProtocol.request_register_result(
             self.username, password)
@@ -97,7 +97,7 @@ class Client(object):
 
     def send_login_data(self):
         """Prompt user for username and password for login and send them to the server"""
-        password = self.credentials_input(self)
+        password = self.credentials_input()
 
         request_text = RequestProtocol.request_login_result(
             self.username, password)
