@@ -94,7 +94,7 @@ class Client(object):
 
     def send_login_data(self):
         """Prompt user for username and password for login and send them to the server"""
-        username, password = self.credentials_input()
+        self.username, password = self.credentials_input()
         # self.username = input('Username: ')
         # password = input('Password: ')
         # password = getpass.getpass(prompt="Password: ")
