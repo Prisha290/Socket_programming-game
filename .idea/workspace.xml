@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3e65ed0-e668-41c5-a5b6-e309e86888e4" name="Default Changelist" comment="" />
+    <list default="true" id="b3e65ed0-e668-41c5-a5b6-e309e86888e4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_v3/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v3/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.json" beforeDir="false" />
+    </list>
     <list id="6f1a3877-2edc-4c00-9e75-87b101e7f8e6" name="Changes by nirmalya" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +115,7 @@
       <workItem from="1646853507077" duration="14288000" />
       <workItem from="1646871219326" duration="7375000" />
       <workItem from="1646890051216" duration="7964000" />
+      <workItem from="1646961193397" duration="738000" />
     </task>
     <servers />
   </component>

@@ -186,7 +186,7 @@ class Client(object):
 
     def command_start_handle(self, response_data):
         """Request to start game and send the command to the server"""
-        level = 'hard'  # default difficulty level
+        level = 'medium'  # default difficulty level
         if self.difficulty == 1:
             level = 'easy'
         elif self.difficulty == 2:
