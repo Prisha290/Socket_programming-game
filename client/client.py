@@ -371,13 +371,10 @@ class Client(object):
 
     def exit(self):
         """Client Disconnect"""
-        # TODO: Fix this - prints twice
-        # os.kill()
+        
         self.conn.close()
         self.is_running = False
         print('\nGoodbye! 👋')
-        # sys.exit(1)
-        # Kill the current process in Linux
         os.kill(os.getpid(), signal.SIGKILL)
 
 
