@@ -7,7 +7,6 @@ from threading import Thread
 from client_socket import ClientSocket
 from config import *
 from Maze import *
-from Maze_Random import *
 from request_protocol import RequestProtocol
 from Timer import *
 

@@ -72,9 +72,10 @@ class Server(object):
 
         int_difficulty = int(difficulty)
 
-        self.mutex_lock.acquire()
-        self.difficulty_list.append(int_difficulty)
-        self.mutex_lock.release()
+        self.mutex_lock.acquire()  # add mutex
+        self.difficulty_list.append(int_difficulty)  # append difficulties to list
+        self.mutex_lock.release()  # release mutex
+
         while len(self.difficulty_list) < 2:
             time.sleep(0.1)
 
@@ -158,7 +159,11 @@ class Server(object):
     def request_play_game_handle(self, client_soc, request_data):
         """Handle the play-game request from the client"""
         print("[SERVER] REQUEST PLAY-GAME-2PLAYER RECEIVED.")
-        self.room += 1
+
+        self.mutex_lock.acquire()  # add mutex lock the room
+        self.room += 1  # update room
+        self.mutex_lock.release()  # release mutex lock
+
         """0004|number of players in room"""
         if self.room == 1:
 
@@ -189,12 +194,9 @@ class Server(object):
         score = request_data['score']
         float_score = float(score)
 
-        # Add mutex lock
-        self.mutex_lock.acquire()
+        self.mutex_lock.acquire()  # Add mutex lock
         self.higher_score.append(float_score)
-
-        # release the lock
-        self.mutex_lock.release()
+        self.mutex_lock.release()   # release the lock
 
         while len(self.higher_score) < 2:
             time.sleep(0.5)
@@ -202,8 +204,10 @@ class Server(object):
         self.higher_score.sort()
 
         # add to high scores board
-        self.high_scores.append(float_score)
-        self.high_scores.sort()
+        self.mutex_lock.acquire()  # add mutex lock
+        self.high_scores.append(float_score)   # append scores to score board
+        self.mutex_lock.release()  # release mutex lock
+        self.high_scores.sort()  # sort the scores in ascending order
 
         response_score = self.higher_score[0]
         self.room = 0
