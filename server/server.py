@@ -24,10 +24,14 @@ class Server(object):
         self.register_service(REQUEST_SEND_DIFFICULTY, self.request_send_difficulty_handle)
 
         self.clients = dict()  # to store online clients
+
+        # Global Context requirement
         self.room = 0  # room space
-        self.higher_score = []  # to store higher score in a game for play 1 amd 2
+        self.higher_score = []  # to store higher score in a game for players
         self.high_scores = []  # to store global high scores
         self.difficulty_list = []  # to store the game difficulty
+
+        # Mutex requirement
         self.mutex_lock = threading.Lock()  # a thread lock
         self.is_running = True  # flag to show if current thread is running
 

@@ -37,9 +37,9 @@ class Client(object):
                               self.response_send_difficulty_handle)
         self.register_service(RESPONSE_EXIT, self.response_exit)
 
+        # Local Context Requirement
         self.username = None  # current client name
         self.is_running = True  # flag to show if current thread is running
-
         self.my_time_elapsed = 0  # for timer
         self.difficulty = 0  # to store game difficulty
         self.local_ranking = []  # to store local ranking
