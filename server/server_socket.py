@@ -1,5 +1,4 @@
 import socket
-
 from config import *
 
 
@@ -9,3 +8,5 @@ class ServerSocket(socket.socket):
 
         self.bind((SERVER_IP, SERVER_PORT))
         self.listen(128)
+
+# inheritance of socket module into another class so super should be used

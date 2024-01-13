@@ -11,7 +11,6 @@ USERS_FILE = 'users.json'
 
 # [CLIENT] This function generates a hashed password
 
-
 def hash_password(password):
     salt = uuid.uuid4().hex
     code = salt.encode() + password.encode()

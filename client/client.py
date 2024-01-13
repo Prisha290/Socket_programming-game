@@ -196,7 +196,7 @@ class Client(object):
 
         # maze = Maze_Random(int(self.difficulty))
 
-        timer = Timer()
+        timer = Timer() 
         timer.start()
         maze.start_game()
         elapsed = timer.stop()
@@ -374,7 +374,7 @@ class Client(object):
         self.conn.close()
         self.is_running = False
         print('\nGoodbye! 👋')
-        os.kill(os.getpid(), signal.SIGKILL)
+        os.kill(os.getpid(), signal.SIGILL)
 
 
 if __name__ == '__main__':
